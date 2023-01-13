@@ -1,0 +1,59 @@
+{% extends "mail/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+<div class="w-75 mx-auto align-self-center">
+    <div class="d-flex justify-content-between align-items-center mt-4">
+        <u>
+            <h4>{{ request.user.email }}<h4>
+        </u>
+        <a class="btn btn-sm btn-outline-danger" href="{% url 'logout' %}">Log Out</a>
+    </div>
+
+    <ul class="nav nav-tabs my-3">
+        <li class="nav-item">
+            <button class="nav-link active" id="inbox">Inbox</button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link" id="compose">Compose</button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link" id="sent">Sent</button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link" id="archive">Archived</button>
+        </li>
+    </ul>
+
+    <div id="emails-view">
+    </div>
+
+    <div id="email-view">
+    </div>
+
+    <div id="compose-view">
+        <h4>New Email</h4>
+        <form id="compose-form" class="mt-4">
+            <div class="input-group mb-2 align-items-center">
+                From: <input disabled class="form-control ms-2" value="{{ request.user.email }}">
+            </div>
+            <div class="input-group mb-2 align-items-center">
+                To: <input id="compose-recipients" name="recipients" class="form-control ms-2">
+            </div>
+            <div class="input-group mb-2">
+                <input class="form-control" id="compose-subject" name="subject" placeholder="Subject">
+            </div>
+            <textarea class="form-control mb-2" id="compose-body" name="body" placeholder="Body"></textarea>
+            <div class="w-100 d-flex justify-content-end">
+                <input type="submit" class="btn btn-success px-4" value="Send" />
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'mail/inbox.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+<div class="d-flex flex-column align-items-center py-5">
+    {% if message %}
+    <div class="alert alert-warningm-3" role="alert">
+        {{ message }}
+    </div>
+    {% endif %}
+    <h2 class="mb-4">Register</h2>
+
+    <form action="{% url 'register' %}" method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <input required autofocus class="form-control" autofocus type="text" name="username" placeholder="Username">
+        </div>
+        <div class="mb-3">
+            <input required class="form-control" type="email" name="email" placeholder="Email Address">
+        </div>
+        <div class="mb-3">
+            <input required class="form-control" type="password" name="password" placeholder="Password">
+        </div>
+        <div class="mb-3">
+            <input required class="form-control" type="password" name="confirmation" placeholder="Confirm Password">
+        </div>
+
+        <div class="d-flex justify-content-center mb-3">
+            <input class="btn btn-primary" type="submit" value="Register">
+        </div>
+    </form>
+
+    <span>Already have an account? <a href="{% url 'login' %}">Log In here.</a></span>
+</div>
+{% endblock %}

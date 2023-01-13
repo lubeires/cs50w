@@ -1,0 +1,17 @@
+textarea {
+  height: 25vh;
+}
+
+#emails-view a {
+  text-decoration: none;
+  color: #212529;
+}
+
+.email-link:hover {
+  cursor: pointer;
+  opacity: 83%;
+}
+
+#email-view p {
+  margin: 0.3rem;
+}

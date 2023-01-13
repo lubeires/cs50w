@@ -1,0 +1,114 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+<h3>{{ title }}</h3>
+<div class="d-flex flex-column">
+    {% if user.is_authenticated %}
+    {% if title == 'Home' %}
+    <form action="{% url 'post' %}" method="post" id="postForm">
+        {% csrf_token %}
+        <hr />
+        <div class="form-floating">
+            <textarea name="content" class="form-control" placeholder="What's up?" id="newPost"
+                style="height: 120px;"></textarea>
+            <label for="newPost" class="fw-bold text-secondary">What's up, {{ user.username }}?</label>
+        </div>
+        <div class="d-flex justify-content-end">
+            <input class="btn btn-primary px-4 mt-3" type="submit" value="Post" form="postForm">
+        </div>
+    </form>
+    {% endif %}
+    {% endif %}
+    <hr />
+    <div class="list-group">
+        {% if not page %}
+        <p class="mx-auto justify-self-center mb-0 text-secondary h6">Nothing to see here...</p>
+        {% endif %}
+        {% for post in page %}
+        <div class="list-group-item">
+            <div class="d-flex w-100 justify-content-between">
+                <a href="{% url 'user' post.owner %}" class="mb-1 h6 owner">@{{ post.owner }}</a>
+
+                {% if post.owner == user %}
+                <i class="fa-regular fa-pen-to-square text-secondary edit" data-bs-toggle="modal"
+                    data-bs-target="#editModal" data-post-content="{{ post.content }}" data-post-id="{{ post.pk }}"></i>
+                {% endif %}
+            </div>
+
+            <p class="p-0 m-1">{{ post.content }}</p>
+
+            <div class="d-flex w-100 justify-content-between">
+                <div class="text-secondary like-container">
+                    <i class="{% if user in post.likedBy.all %} fa-solid text-danger {% else %} fa-regular {% endif %} fa-heart like"
+                        data-post-id="{{ post.pk }}"></i>
+
+                    <div class="count" data-value="{{ post.likedBy.count }}" id="{{ post.pk }}">{{ post.likedBy.count }}
+                    </div>
+                </div>
+
+                <small class="fst-italic text-secondary">{{ post.postedAt }}</small>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!--Pagination-->
+<nav class="d-flex justify-content-center mt-4 p-0">
+    <ul class="pagination m-0">
+        {% if page.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="?page=1">
+                <span>&laquo; first</span>
+            </a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page.previous_page_number }}">
+                <span>&laquo; previous</span>
+            </a>
+        </li>
+        {% endif %}
+
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page.number }}">
+                <span>{{ page.number }}</span>
+            </a>
+        </li>
+
+        {% if page.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page.next_page_number }}">
+                <span>next &raquo;</span>
+            </a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page.paginator.num_pages }}">
+                <span>last &raquo;</span>
+            </a>
+        </li>
+        {% endif %}
+    </ul>
+</nav>
+
+<!--Modal for post editing-->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editLabel">Edit post</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <label for="newPostContent" class="col-form-label">Post</label>
+                    <textarea class="form-control" id="newPostContent"></textarea>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="update">Update</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

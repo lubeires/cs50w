@@ -1,0 +1,114 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  font-size: 15px; }
+
+header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem;
+  gap: 1rem;
+  height: 30px; }
+  header a {
+    color: #3c3c3c;
+    text-decoration: none; }
+  header a:hover {
+    text-decoration: underline; }
+  header a img {
+    height: 20px; }
+
+img {
+  width: fit-content; }
+
+.search-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 100px;
+  gap: 20px; }
+  .search-container input[type="text"] {
+    border: none;
+    padding: 12px 20px;
+    width: 550px;
+    border: 1px solid #c8c8c8;
+    border-radius: 30px;
+    outline: none; }
+  .search-container input[type="text"]:focus {
+    border-color: #4285F4; }
+
+#images-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; }
+  #images-logo span {
+    margin-top: -20px;
+    color: #4285F4;
+    font-size: 18px; }
+
+.form-search {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem; }
+
+.search-button {
+  width: fit-content;
+  padding: .6rem 1rem;
+  margin: .5rem;
+  color: #3c3c3c;
+  border: 1px solid #f0f0f0;
+  border-radius: 3px;
+  background-color: #f0f0f0; }
+
+.search-button:hover {
+  border-color: #c8c8c8; }
+
+h3 {
+  font-size: 18px;
+  color: #4285F4; }
+
+hr {
+  margin-block: 1rem 2rem;
+  border: none;
+  border-top: 1px solid #f0f0f0; }
+
+h3,
+p,
+#form-advanced-search {
+  padding-left: 3rem; }
+
+#form-advanced-search {
+  display: flex;
+  flex-direction: column;
+  padding-top: 1rem;
+  gap: 1rem; }
+  #form-advanced-search label {
+    font-size: 13px; }
+  #form-advanced-search .input-div {
+    width: 600px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px; }
+    #form-advanced-search .input-div input[type="text"] {
+      border: none;
+      padding: 3px;
+      width: 400px;
+      border: 1px solid #c8c8c8;
+      border-radius: 2px;
+      outline: none;
+      font-size: 13px; }
+    #form-advanced-search .input-div input[type="text"]:focus {
+      border-color: #4285F4; }
+  #form-advanced-search #advanced-search-button {
+    margin-inline: 0;
+    background-color: #4285F4;
+    color: white;
+    font-size: 13px;
+    font-weight: bold; }
+  #form-advanced-search #advanced-search-button:hover {
+    border-color: #3c3c3c; }
+
+/*# sourceMappingURL=style.css.map */
